@@ -40,6 +40,12 @@ const defaultPizzas: Pizza[] = [
    GET /pizzas?order=title : ascending order by title
    GET /pizzas?order=-title : descending order by title
 */
+
+router.get("/error", (_req, _res, _next) => {
+  throw new Error("This is an error");
+  // equivalent of next(new Error("This is an error"));
+});
+
 router.get("/", (req, res) => {
   if (req.query.order && typeof req.query.order !== "string") {
     return res.sendStatus(400);
