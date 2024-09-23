@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Movie } from "../types"
+import { Movie } from "../types";
 
 const router = Router();
 
@@ -23,7 +23,7 @@ const movies: Movie[] = [
         duration : 117
     }
 
-]
+];
 
 router.get("/", (_req, res) => {
     return res.json(movies);
