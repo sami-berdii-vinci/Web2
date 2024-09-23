@@ -14,6 +14,9 @@ interface Movie {
   title: string;
   director: string;
   duration: number;
+  budget?: number;
+  description?: string;
+  imageURL?: string;
 }
 
 type NewPizza = Omit<Pizza, "id">;
