@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Drink } from "../types";
+import { Drink, NewDrink } from "../types";
 
 const drinks: Drink[] = [
   {
@@ -88,6 +88,7 @@ router.post("/", (req, res) => {
     return res.sendStatus(400);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { title, image, volume, price } = body as NewDrink;
 
   const nextId =
