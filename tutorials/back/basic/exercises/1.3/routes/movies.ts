@@ -65,12 +65,6 @@ router.post("/", (req, res) => {
     return res.sendStatus(400);
   }
 
-  for (const movie of movies) {
-    if (body.title === movie.title && body.director === movie.director){
-      return res.sendStatus(409);
-    }
-  }
-
   const { title, director, duration } = body as NewMovie;
 
   const nextId = movies.reduce((maxId, movie) => (movie.id > maxId ? movie.id : maxId), 0) + 1;
