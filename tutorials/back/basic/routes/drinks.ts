@@ -89,7 +89,7 @@ router.post("/", (req, res) => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { title, image, volume, price } = body as NewDrink;
+  const { title, image, volume, price, } = body as NewDrink;
 
   const nextId =
     drinks.reduce((maxId, drink) => (drink.id > maxId ? drink.id : maxId), 0) +
