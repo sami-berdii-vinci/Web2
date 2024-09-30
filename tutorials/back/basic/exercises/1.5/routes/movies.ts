@@ -57,10 +57,7 @@ router.post("/", (req, res) => {
     typeof body.duration !== "number" ||
     body.duration <= 0 ||
     !body.title.trim() ||
-    !body.director.trim() ||
-    ("budget" in body && (typeof body.budget !== "number" || body.budget <= 0) ||
-    "description" in body && (typeof body.description !== "string") ||
-    "imageURL" in body && (typeof body.imageURL !== "string"))
+    !body.director.trim()
   ) {
     return res.sendStatus(400);
   }
