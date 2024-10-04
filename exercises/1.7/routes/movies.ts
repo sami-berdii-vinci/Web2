@@ -1,9 +1,12 @@
 import { Router } from "express";
+import path from "node:path";
 import { Movie, NewMovie } from "../types";
+import { parse, serialize } from "../utils/json";
+const jsonDbPath = path.join(__dirname, "/../data/movies.json");
 
 const router = Router();
 
-const movies: Movie[] = [
+const defaultMovies: Movie[] = [
   {
     id: 1,
     title: "Les Schtroumpfs",
@@ -25,6 +28,7 @@ const movies: Movie[] = [
 ];
 
 router.get("/", (req, res) => {
+  const movies = parse(jsonDbPath, defaultMovies);
   if (!req.query["duration-max"]) {
     return res.json(movies);
   }
@@ -37,6 +41,7 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const id = Number(req.params.id);
+  const movies = parse(jsonDbPath, defaultMovies)
   const movie = movies.find((movie) => movie.id === id);
   if (!movie) {
     return res.sendStatus(404);
@@ -62,13 +67,15 @@ router.post("/", (req, res) => {
     return res.sendStatus(400);
   }
 
-  for (const movie of movies) {
+  /*for (const movie of movies) {
     if (body.title === movie.title && body.director === movie.director){
       return res.sendStatus(409);
     }
-  }
+  }*/
 
   const { title, director, duration } = body as NewMovie;
+
+  const movies = parse(jsonDbPath, defaultMovies);
 
   const nextId = movies.reduce((maxId, movie) => (movie.id > maxId ? movie.id : maxId), 0) + 1;
   const newMovie: Movie = {
@@ -79,21 +86,25 @@ router.post("/", (req, res) => {
   };
 
   movies.push(newMovie);
+  serialize(jsonDbPath, movies);
   return res.json(newMovie);
 });
 
 router.delete("/:id", (req, res) => {
   const id = Number(req.params.id);
+  const movies = parse(jsonDbPath, defaultMovies);
   const index = movies.findIndex((movie) => movie.id === id);
   if (index === -1) {
     return res.sendStatus(404);
   }
   const deletedElements = movies.splice(index, 1);
+  serialize(jsonDbPath, movies);
   return res.json(deletedElements[0]);
 });
 
 router.patch("/:id", (req, res) => {
   const id = Number(req.params.id);
+  const movies = parse(jsonDbPath, defaultMovies);
   const movie = movies.find((movie) => movie.id === id);
   if (!movie) {
     return res.sendStatus(404);
@@ -122,6 +133,8 @@ router.patch("/:id", (req, res) => {
   if (duration) {
     movie.duration = duration;
   }
+
+  serialize(jsonDbPath, movies);
 
   return res.json(movie);
 });
