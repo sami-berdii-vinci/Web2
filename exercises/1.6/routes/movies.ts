@@ -12,7 +12,7 @@ const movies: Movie[] = [
   },
   {
     id: 2,
-    title: "Le diner de cons",
+    title: "L'avare",
     director: "Louis de Funès",
     duration: 102,
   },
@@ -90,6 +90,40 @@ router.delete("/:id", (req, res) => {
   }
   const deletedElements = movies.splice(index, 1);
   return res.json(deletedElements[0]);
+});
+
+router.patch("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  const movie = movies.find((movie) => movie.id === id);
+  if (!movie) {
+    return res.sendStatus(404);
+  }
+
+  const body: unknown = req.body;
+
+  if (
+    !body ||
+    typeof body !== "object" ||
+    ("title" in body && (typeof body.title !== "string" || !body.title.trim())) ||
+    ("director" in body && (typeof body.director !== "string" || !body.director.trim())) ||
+    ("duration" in body && (typeof body.duration !== "number"))
+  ) {
+    return res.sendStatus(400);
+  }
+
+  const { title, director, duration }: Partial<NewMovie> = body;
+
+  if (title) {
+    movie.title = title;
+  }
+  if (director) {
+    movie.director = director;
+  }
+  if (duration) {
+    movie.duration = duration;
+  }
+
+  return res.json(movie);
 });
 
 export default router;
