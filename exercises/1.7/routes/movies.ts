@@ -139,4 +139,63 @@ router.patch("/:id", (req, res) => {
   return res.json(movie);
 });
 
+router.put("/:id", (req, res) => {
+  const body: unknown = req.body;
+
+  if (
+    !body ||
+    typeof body !== "object" ||
+    !("title" in body) ||
+    !("director" in body) ||
+    !("duration" in body) ||
+    typeof body.title !== "string" ||
+    typeof body.director !== "string" ||
+    typeof body.duration !== "number" ||
+    !body.title.trim() ||
+    !body.director.trim() ||
+    body.duration <= 0 ||
+    ("budget" in body &&
+      (typeof body.budget !== "number" || body.budget <= 0)) ||
+    ("description" in body &&
+      (typeof body.description !== "string" || !body.description.trim())) ||
+    ("imageUrl" in body &&
+      (typeof body.imageUrl !== "string" || !body.imageUrl.trim()))
+  ) {
+    return res.sendStatus(400);
+  }
+
+  const id = Number(req.params.id);
+
+  if (isNaN(id)) {
+    return res.sendStatus(400);
+  }
+
+  const movies = parse(jsonDbPath, defaultMovies);
+
+  const indexOfMovieToUpdate = movies.findIndex((movie) => movie.id === id);
+  
+  if (indexOfMovieToUpdate < 0) {
+    const newMovie = body as NewMovie;
+
+    const nextId =
+      movies.reduce((acc, movie) => (movie.id > acc ? movie.id : acc), 0) + 1;
+
+    const addedMovie = { id: nextId, ...newMovie };
+
+    movies.push(addedMovie);
+
+    serialize(jsonDbPath, movies);
+
+    return res.json(addedMovie);
+  }
+
+  const updatedMovie = { ...movies[indexOfMovieToUpdate], ...body } as Movie;
+
+  movies[indexOfMovieToUpdate] = updatedMovie;
+
+  serialize(jsonDbPath, movies);
+
+  return res.send(updatedMovie);
+});
+
 export default router;
