@@ -1,3 +1,8 @@
+interface HeaderProps {
+  title : string;
+}
+
+
 const App = () => {
   const pageTitle = "Informations sur les films dans les cinémas";
 
@@ -15,37 +20,54 @@ const App = () => {
 
   return (
     <div>
-      <h1>{pageTitle}</h1>
-
       <div>
-        <h2>{cinema1Name}</h2>
-        <ul>
-          <li>
-            <strong>{cinema1Movie1Title}</strong> - Réalisateur :{" "}
-            {cinema1Movie1Director}
-          </li>
-          <li>
-            <strong>{cinema1Movie2Title}</strong> - Réalisateur :{" "}
-            {cinema1Movie2Director}
-          </li>
-        </ul>
+        <Header title={pageTitle}/>
       </div>
 
-      <div>
-        <h2>{cinema2Name}</h2>
-        <ul>
-          <li>
-            <strong>{cinema2Movie1Title}</strong> - Réalisateur :{" "}
-            {cinema2Movie1Director}
-          </li>
-          <li>
-            <strong>{cinema2Movie2Title}</strong> - Réalisateur :{" "}
-            {cinema2Movie2Director}
-          </li>
-        </ul>
-      </div>
+      <Cinema 
+        name={cinema1Name}
+        movie1title={cinema1Movie1Title}
+        movie1director={cinema1Movie1Director}
+        movie2title={cinema1Movie2Title}
+        movie2director={cinema1Movie2Director}
+      />
+
+      <Cinema 
+        name={cinema2Name}
+        movie1title={cinema2Movie1Title}
+        movie1director={cinema2Movie1Director}
+        movie2title={cinema2Movie2Title}
+        movie2director={cinema2Movie2Director}
+      />
+      
     </div>
   );
+};
+
+const Header = (props : HeaderProps) => {
+  return (
+    <header>
+      <h1>{props.title}</h1>
+    </header>
+  )
+};
+
+const Cinema = (props: {name:string, movie1title:string, movie1director:string, movie2title:string, movie2director:string})=> {
+  return (
+  <div>
+    <h2>{props.name}</h2>
+    <ul>
+      <li>
+        <strong>{props.movie1title}</strong> - Réalisateur :{" "}
+        {props.movie1director}
+      </li>
+      <li>
+      <strong>{props.movie2title}</strong> - Réalisateur :{" "}
+        {props.movie2director}
+      </li>
+    </ul>
+  </div>
+  )
 };
 
 export default App;
