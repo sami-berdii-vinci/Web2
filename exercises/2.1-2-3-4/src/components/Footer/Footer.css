@@ -1,4 +1,9 @@
 .footerImage{
     height: 40%;
-    width: 50%;
+    width: 95%;
+}
+
+footer{
+    background-color: black;
+    padding-left: 5%;
 }
