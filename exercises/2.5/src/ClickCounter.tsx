@@ -3,6 +3,7 @@ import { useState } from "react";
 interface ClickCounterProps{
     title : string;
     message : string;
+    buttonMessage : string;
 }
 
 const ClickCounter = ({title, message}: ClickCounterProps) => {
@@ -13,12 +14,27 @@ const ClickCounter = ({title, message}: ClickCounterProps) => {
         setCount((count) => count + 1);
     }
 
+    const [buttonMessage, setButtonMessage] = useState("")
+
+    const HandleHover = () => {
+        if(buttonMessage === ""){
+            setButtonMessage("Please click on me now !");
+        }else{
+            setButtonMessage("");
+        }
+        
+    }
+    
+    
+
     return (
         <div className="card">
             <h3>{title}</h3>
-            <button onClick={HandleClick}>
+            <p className="buttonMessage">{buttonMessage ? buttonMessage : ""}</p>
+            <button onClick={HandleClick} onMouseEnter={HandleHover} onMouseLeave={HandleHover}>
                 count is {count}
             </button>
+            
             <p>
                 {count >= 10 ? message  : ""}
             </p>
