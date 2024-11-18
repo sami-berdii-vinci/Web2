@@ -1,9 +1,11 @@
 import { useState, SyntheticEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import "./AddPizzaPage.css";
+import { PizzeriaContext } from "../../types";
 
 const AddPizzaPage = () => {
-  // TODO : Get the addPizza function
+  const AddPizzaPage = () => {
+    const { addPizza }: PizzeriaContext = useOutletContext();  
 
   const navigate = useNavigate();
   const [pizza, setPizza] = useState("");

@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import "./App.css";
 import Footer from "../Footer";
 import Header from "../Header";
-import { Drink, NewPizza, Pizza } from "../../types";
+import { Drink, NewPizza, Pizza, PizzeriaContext } from "../../types";
 import NavBar from "../Navbar";
 
 
@@ -76,8 +76,15 @@ const App = () => {
     setActionToBePerformed(false);
   };
 
-  // TODO : pass the state and functions to the children components
-
+  const fullPizzaContext: PizzeriaContext = {
+    addPizza,
+    pizzas,
+    setPizzas,
+    actionToBePerformed,
+    setActionToBePerformed,
+    clearActionToBePerformed,
+    drinks,
+  };
 
   return (
     <div className="page">
@@ -87,8 +94,8 @@ const App = () => {
         handleHeaderClick={handleHeaderClick}
       />
       <main>
-      <NavBar />
-        <Outlet/>
+        <NavBar />
+        <Outlet context={fullPizzaContext} />
       </main>
       <Footer />
     </div>
