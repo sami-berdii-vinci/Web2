@@ -2,7 +2,8 @@ import { useState } from "react";
 import AddMovieForm from "../AddMovieForm";
 import MovieListView from "../MovieListView";
 import PageTitle from "../PageTitle";
-import { Movie } from "../../types";
+import { CinemaContext, Movie } from "../../types";
+import { Outlet, useOutletContext } from "react-router-dom";
 
 const MovieListPage = () => {
   const defaultMovies: Movie[] = [
@@ -57,19 +58,22 @@ const MovieListPage = () => {
     },
   ];
 
-  const [movies, setMovies] = useState(defaultMovies);
+  /*const [movies, setMovies] = useState(defaultMovies);*/
 
-  const onMovieAdded = (newMovie: Movie) => {
+  /*const onMovieAdded = (newMovie: Movie) => {
     console.log("Movie to add:", newMovie);
     setMovies([...movies, newMovie]);
-  };
+  };*/
+
+  const {movies}: CinemaContext = useOutletContext();
+  
   return (
     <div>
       <PageTitle title="My favorite movies" />
 
       <MovieListView movies={movies} />
 
-      <AddMovieForm onMovieAdded={onMovieAdded} />
+      <Outlet />
 
       <br />
       <br />
@@ -78,5 +82,7 @@ const MovieListPage = () => {
     </div>
   );
 };
+
+//<AddMovieForm onMovieAdded={onMovieAdded} /> --> ce code se trouvait à la ligne 76 avant modification
 
 export default MovieListPage;

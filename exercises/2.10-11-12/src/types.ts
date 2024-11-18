@@ -6,5 +6,12 @@ interface Movie {
     description?: string;
     budget?: number;
   }
+
+  type NewMovie = Omit<Movie, "id">;
+
+  interface CinemaContext {
+    movies: Movie[];
+    addMovie: (newMovie : NewMovie) => void;
+  }
   
-  export type { Movie };
+  export type { Movie, NewMovie, CinemaContext };
