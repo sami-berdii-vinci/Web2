@@ -4,8 +4,8 @@ import "./AddPizzaPage.css";
 import { PizzeriaContext } from "../../types";
 
 const AddPizzaPage = () => {
-  const AddPizzaPage = () => {
-    const { addPizza }: PizzeriaContext = useOutletContext();  
+  
+  const { addPizza }: PizzeriaContext = useOutletContext();  
 
   const navigate = useNavigate();
   const [pizza, setPizza] = useState("");
@@ -14,7 +14,7 @@ const AddPizzaPage = () => {
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     addPizza({ title: pizza, content: description });
-    navigate("/");
+    navigate("/"); // --> pour rediriger vers la homepage une fois le formulaire envoyé <-- <-- <-- !!!
   };
 
   const handlePizzaChange = (e: SyntheticEvent) => {
