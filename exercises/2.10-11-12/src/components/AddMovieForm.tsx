@@ -3,10 +3,10 @@ import { Movie } from "../types.ts";
 import "./AddMovieForm.css";
 
 interface AddMovieFormProps {
-  onMovieAdded: (movie: Movie) => void;
+  addMovie: (movie: Movie) => void;
 }
 
-const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
+const AddMovieForm = ({ addMovie }: AddMovieFormProps) => {
   const [title, setTitle] = useState("");
   const [director, setDirector] = useState("");
   const [duration, setDuration] = useState(0);
@@ -16,7 +16,7 @@ const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    onMovieAdded({ title, director, duration, imageUrl, description, budget });
+    addMovie({ title, director, duration, imageUrl, description, budget });
     setTitle("");
     setDirector("");
     setDuration(0);

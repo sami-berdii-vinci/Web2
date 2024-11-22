@@ -1,12 +1,12 @@
-import { useState } from "react";
-import AddMovieForm from "../AddMovieForm";
+//import { useState } from "react";
+//import AddMovieForm from "../AddMovieForm";
 import MovieListView from "../MovieListView";
 import PageTitle from "../PageTitle";
-import { CinemaContext, Movie } from "../../types";
-import { Outlet, useOutletContext } from "react-router-dom";
+import { CinemaContext } from "../../types";
+import { useOutletContext } from "react-router-dom";
 
 const MovieListPage = () => {
-  const defaultMovies: Movie[] = [
+  /*const defaultMovies: Movie[] = [
     {
       title: "Shang-Chi and the Legend of the Ten Rings",
       director: "Destin Daniel Cretton",
@@ -56,7 +56,7 @@ const MovieListPage = () => {
         "In a near future, a lonely writer develops an unlikely relationship with an operating system designed to meet his every need.",
       budget: 23,
     },
-  ];
+  ];*/
 
   /*const [movies, setMovies] = useState(defaultMovies);*/
 
@@ -73,8 +73,6 @@ const MovieListPage = () => {
 
       <MovieListView movies={movies} />
 
-      <Outlet />
-
       <br />
       <br />
       <br />
@@ -83,6 +81,6 @@ const MovieListPage = () => {
   );
 };
 
-//<AddMovieForm onMovieAdded={onMovieAdded} /> --> ce code se trouvait à la ligne 76 avant modification
+
 
 export default MovieListPage;

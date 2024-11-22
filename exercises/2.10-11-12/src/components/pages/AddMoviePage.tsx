@@ -1,11 +1,14 @@
-import { SyntheticEvent, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom"
+//import { SyntheticEvent, useState } from "react";
+//import { useNavigate, useOutletContext } from "react-router-dom"
+import { useOutletContext } from "react-router-dom";
 import { CinemaContext } from "../../types";
+import AddMovieForm from "../AddMovieForm";
+import PageTitle from "../PageTitle";
 
 const AddMoviePage = () => {
     const { addMovie }: CinemaContext = useOutletContext();
 
-    const navigate = useNavigate();
+    /*const navigate = useNavigate();
     const [movie, setMovie] = useState("");
     const [director, setDirector] = useState("");
     const [duration, setDuration] = useState(0);
@@ -60,9 +63,9 @@ const AddMoviePage = () => {
         const budgetInput = e.target as HTMLInputElement;
         console.log("change in budgetInput: ", budgetInput.value);
         setBudget(budgetInput.valueAsNumber);
-    };
+    };*/
 
-    return (
+    /*return (
         <div>
             <h1>Ajouter un film</h1>
             <form onSubmit={handleSubmit}>
@@ -126,7 +129,18 @@ const AddMoviePage = () => {
                 <button type="submit">Ajouter le film</button>  
             </form>
         </div>
-    );
+    );*/
+
+    return (
+        <div>
+            <PageTitle title="Add a movie"/>
+            <AddMovieForm addMovie={addMovie}/>
+            <br />
+            <br />
+            <br />
+            <br />
+        </div>
+    )
 };
 
 export default AddMoviePage;

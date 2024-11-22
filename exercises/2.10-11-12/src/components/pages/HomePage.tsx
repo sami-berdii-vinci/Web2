@@ -3,9 +3,6 @@ import PageTitle from "../PageTitle";
 //import { CinemaContext } from "../../types";
 
 const HomePage = () => {
-
-  
-
   return (
     <div>
       <PageTitle title="myMovies" />
