@@ -10,9 +10,9 @@ interface Movie {
 
   interface CinemaContext {
     movies: Movie[];
-    addMovie: (newMovie : NewMovie) => void;
+    addMovie: (newMovie : Movie) => void;
   }
 
   type NewMovie = Omit<Movie, "id">;
   
-  export type { Movie, NewMovie, CinemaContext };
+  export type { Movie, CinemaContext, NewMovie };
