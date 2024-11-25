@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
 
+interface Joke{
+  joke : string;
+  category : string;
+};
+
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [joke, setJoke] = useState<Joke | undefined>(undefined);
+  
+  useEffect(() => {
+    fetch("https://v2.jokeapi.dev/joke/Any?type=single")
+      .then((response) => {
+        if (!response.ok) throw new Error(`fetch error : ${response.status} : ${response.statusText}`);
+        return response.json();
+      })
+      .then((data) => {
+        setJoke({
+          joke: data.joke ?? "No joke found",
+          category: data.category ?? "Unknown",
+        });
+      });
+  }, []);
+
+  if (!joke) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <h1> Jokes Central </h1>
+      <h3>Random joke</h3>
+      <h4>{joke.category}</h4>
+      <p>{joke.joke}</p> 
+    </div>
   )
+
+  
 }
 
 export default App
