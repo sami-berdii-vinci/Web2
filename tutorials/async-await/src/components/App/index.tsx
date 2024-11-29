@@ -35,19 +35,24 @@ const App = () => {
   const [pizzas, setPizzas] = useState<Pizza[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3000/pizzas")
-      .then((response) => {
-        if (!response.ok)
-          throw new Error(
-            `fetch error : ${response.status} : ${response.statusText}`
-          );
-        return response.json();
-      })
-      .then((pizzas) => setPizzas(pizzas))
-      .catch((err) => {
-        console.error("HomePage::error: ", err);
-      });
+    fetchPizzas();
   }, []);
+
+  const fetchPizzas = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/pizzas");
+
+      if (!response.ok)
+        throw new Error(
+          `fetch error : ${response.status} : ${response.statusText}`
+        );
+
+      const pizzas = await response.json();
+      setPizzas(pizzas);
+    } catch (err) {
+      console.error("HomePage::error: ", err);
+    }
+  };
 
   const addPizza = (newPizza: NewPizza) => {
     const pizzaAdded = { ...newPizza, id: nextPizzaId(pizzas) };
