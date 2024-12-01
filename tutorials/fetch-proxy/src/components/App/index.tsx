@@ -50,7 +50,7 @@ const App = () => {
 
   async function getAllPizzas() {
     try {
-      const response = await fetch("http://localhost:3000/pizzas");
+      const response = await fetch("/api/pizzas");
 
       if (!response.ok)
         throw new Error(
@@ -76,7 +76,7 @@ const App = () => {
         },
       };
 
-      const response = await fetch("http://localhost:3000/pizzas", options); // fetch retourne une "promise" => on attend la réponse
+      const response = await fetch("/api/pizzas", options); // fetch retourne une "promise" => on attend la réponse
 
       if (!response.ok)
         throw new Error(
