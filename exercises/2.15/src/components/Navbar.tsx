@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-const NavBar = () => ( // c'est dans main.tsx qu'on s'occupe de définir le path de chaque page !!!
+const NavBar = () => (
   <nav className="navbar">
     <Link to="/">Home</Link>
     <Link to="/cinemas">Cinemas</Link>

@@ -1,18 +1,18 @@
 interface Movie {
-    id: number;
-    title: string;
-    director: string;
-    duration: number;
-    imageUrl?: string;
-    description?: string;
-    budget?: number;
-  }
+  id: number;
+  title: string;
+  director: string;
+  duration: number;
+  imageUrl?: string;
+  description?: string;
+  budget?: number;
+}
 
-  interface CinemaContext {
-    movies: Movie[];
-    addMovie: (newMovie : Movie) => void;
-  }
+interface MovieContext {
+  movies: Movie[];
+  onMovieAdded: (newMovie: NewMovie) => void;
+}
 
-  type NewMovie = Omit<Movie, "id">;
-  
-  export type { Movie, CinemaContext, NewMovie };
+type NewMovie = Omit<Movie, "id">;
+
+export type { Movie, MovieContext, NewMovie };

@@ -26,7 +26,7 @@ const CinemaPage = () => {
       duration: 120,
     },
     {
-      id : 3,
+      id: 3,
       title: "INCEPTION",
       director: "Christopher Nolan",
       description:

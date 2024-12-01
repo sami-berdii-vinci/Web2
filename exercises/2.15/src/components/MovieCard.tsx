@@ -1,4 +1,4 @@
-import { Movie } from "../types.ts";
+import { Movie } from "../types";
 import "./MovieCard.css";
 
 
@@ -12,7 +12,7 @@ const MovieCard = ({ movie }: MovieCardProps) => {
      
       <div className="card-body">
         <h3 className="card-title">{movie.title}</h3>
-        {movie.imageUrl && ( //notation pour les champs optionnels : si movie.imgurl existe alors affiche l'image ; si movie.imgurl n'existe pas alors ne va pas plus loin
+        {movie.imageUrl && (
         <img src={movie.imageUrl} className="card-img-top" alt={movie.title} />
       )}
         <p className="card-text">
@@ -21,12 +21,12 @@ const MovieCard = ({ movie }: MovieCardProps) => {
         <p className="card-text">
           <strong>Durée :</strong> {movie.duration} minutes
         </p>
-        {movie.budget && ( //idem
+        {movie.budget && (
           <p className="card-text">
             <strong>Budget :</strong> {movie.budget} millions de dollars
           </p>
         )}
-        {movie.description && ( //idem
+        {movie.description && (
           <p className="card-text">
             <strong>Description :</strong> {movie.description}
           </p>

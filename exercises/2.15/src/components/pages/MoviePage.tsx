@@ -1,9 +1,9 @@
 import { useMatch, useOutletContext } from "react-router-dom";
-import { CinemaContext } from "../../types";
+import { MovieContext } from "../../types";
 import MovieCard from "../MovieCard";
 
 const MoviePage = () => {
-    const {movies} : CinemaContext = useOutletContext();
+    const {movies} : MovieContext = useOutletContext();
 
     const match = useMatch("/movies/:id");
     const movieId = Number(match?.params.id);

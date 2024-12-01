@@ -6,9 +6,7 @@ interface MovieItemProps {
 }
 
 const MovieItem = ({ movie }: MovieItemProps) => {
-  
   const [descriptionVisible, setDescriptionVisible] = useState(false);
-
   return (
     <li onClick={() => setDescriptionVisible(!descriptionVisible)}>
       <p>

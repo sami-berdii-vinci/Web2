@@ -1,28 +1,29 @@
 import { SyntheticEvent, useState } from "react";
-import { NewMovie } from "../types.ts";
+import { NewMovie } from "../types";
 import "./AddMovieForm.css";
 
 interface AddMovieFormProps {
-  addMovie: (movie: NewMovie) => void;
+  onMovieAdded: (movie: NewMovie) => void;
 }
 
-const AddMovieForm = ({ addMovie }: AddMovieFormProps) => {
+const AddMovieForm = ({ onMovieAdded }: AddMovieFormProps) => {
   const [title, setTitle] = useState("");
   const [director, setDirector] = useState("");
-  const [duration, setDuration] = useState(0);
-  const [imageUrl, setImageUrl] = useState("");
-  const [description, setDescription] = useState("");
-  const [budget, setBudget] = useState(0);
+  const [duration, setDuration] = useState<number | undefined>(undefined);
+  const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
+  const [description, setDescription] = useState<string | undefined>(undefined);
+  const [budget, setBudget] = useState<number | undefined>(undefined);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    addMovie({ title, director, duration, imageUrl, description, budget });
-    setTitle("");
-    setDirector("");
-    setDuration(0);
-    setImageUrl("");
-    setDescription("");
-    setBudget(0);
+    onMovieAdded({
+      title,
+      director,
+      duration: duration ?? 0,
+      imageUrl,
+      description,
+      budget,
+    });
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -48,7 +49,7 @@ const AddMovieForm = ({ addMovie }: AddMovieFormProps) => {
         <label>Durée :</label>
         <input
           type="number"
-          value={duration}
+          value={duration ?? ""}
           onChange={(e) => setDuration(parseInt(e.target.value))}
           required
         />
@@ -72,7 +73,7 @@ const AddMovieForm = ({ addMovie }: AddMovieFormProps) => {
         <label>Budget :</label>
         <input
           type="number"
-          value={budget}
+          value={budget ?? ""}
           onChange={(e) => setBudget(parseInt(e.target.value))}
         />
       </div>
