@@ -9,8 +9,20 @@ GET {{baseUrl}}/drinks/3
 GET {{baseUrl}}/drinks/?budget-max=3
 
 ### Create a drink
+##### Define a request variable named admin :
+# @name admin
+POST {{baseUrl}}/auths/login
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "password":"admin"
+}
+
+### Create a drink with the admin token
 POST {{baseUrl}}/drinks
 Content-Type: application/json
+Authorization: {{admin.response.body.token}}
 
 {
     "title":"Virgin Tonic",
@@ -19,9 +31,12 @@ Content-Type: application/json
     "price":4.5    
 }
 
+
 ### Try to create a drink with incomplete data
 POST {{baseUrl}}/drinks
 Content-Type: application/json
+Authorization: {{admin.response.body.token}}
+
 
 {
     "title":"Missing Data Drink",
@@ -30,12 +45,15 @@ Content-Type: application/json
 }
 
 ### Delete a drink
-DELETE {{baseUrl}}/drinks/2
+DELETE {{baseUrl}}/drinks/5
+Authorization: {{admin.response.body.token}}
 
-### Update the pizza identified by 6
-PATCH {{baseUrl}}/drinks/6
+
+### Update a drink
+PATCH {{baseUrl}}/drinks/3
 Content-Type: application/json
+Authorization: {{admin.response.body.token}}
 
 {
-    "title":"Magic Green 2"
+    "title":"Citronnade"
 }
