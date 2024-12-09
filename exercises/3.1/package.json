@@ -1,39 +1,31 @@
 {
-  "name": "3.1",
+  "name": "jwt-ts-api-boilerplate",
   "version": "1.0.0",
+  "author": "e-Baron",
   "private": true,
   "scripts": {
+    "tsc": "tsc",
     "debug": "npm run dev",
-    "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www",
-    "lint": "eslint **/*.js",
-    "lint:fix": "npm run lint -- --fix"
-  },
-  "nodemonConfig": {
-    "ignore": [
-      "data/*"
-    ],
-    "exec": "npm run lint && node"
+    "dev": "ts-node-dev bin/www",
+    "lint": "eslint --ext .ts .",
+    "start": "node build/bin/www"
   },
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "cookie-parser": "~1.4.4",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
-    "debug": "~2.6.9",
-    "escape-html": "^1.0.3",
-    "express": "~4.16.1",
-    "jsonwebtoken": "^8.5.1",
-    "morgan": "~1.9.1"
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/jsonwebtoken": "^9.0.7",
-    "eslint": "^8.19.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "nodemon": "^2.0.19",
-    "prettier-airbnb-config": "^1.0.0"
-  },
-  "author": "e-Baron"
+    "@types/debug": "^4.1.12",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@typescript-eslint/eslint-plugin": "^7.13.0",
+    "@typescript-eslint/parser": "^7.13.0",
+    "eslint": "^8.56.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "5.4.4"
+  }
 }
